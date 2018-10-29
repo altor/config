@@ -14,3 +14,6 @@ PS1='[\u@\h \W]\$ '
 alias ls='ls --color=auto'
 alias grep='grep --color'
 alias psax='ps ax | grep'
+# read/write to/from the "presse papier"
+alias pbcopy='xsel --clipboard --input'
+alias pbpaste='xsel --clipboard --output'
