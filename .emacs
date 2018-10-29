@@ -25,7 +25,7 @@
  '(mouse-wheel-mode t nil (mwheel))
  '(package-selected-packages
    (quote
-    (python-docstring flycheck-pycheckers flycheck pylint fill-column-indicator groovy-mode ess auctex ## auto-complete web-mode tuareg skype scala-mode2 rust-mode php-mode php+-mode merlin markdown-mode iedit haskell-mode erlang auto-complete-c-headers arduino-mode)))
+    (python-docstring flycheck-pycheckers flycheck pylint fill-column-indicator groovy-mode ess auctex auto-complete web-mode tuareg merlin markdown-mode iedit haskell-mode erlang auto-complete-c-headers)))
  '(show-paren-mode t nil (paren))
  '(transient-mark-mode t))
 
@@ -45,6 +45,23 @@
 (require 'package)
 (add-to-list 'package-archives
   '("melpa" . "http://melpa.milkbox.net/packages/") t)
+
+;; installation des packets
+(setq package-list '(python-docstring flycheck-pycheckers
+flycheck pylint fill-column-indicator groovy-mode ess auctex
+auto-complete web-mode tuareg merlin markdown-mode iedit
+haskell-mode erlang auto-complete-c-headers))
+; activate all the packages (in particular autoloads)
+(package-initialize)
+
+;; fetch the list of packages available
+(unless package-archive-contents
+  (package-refresh-contents))
+
+;; install the missing packages
+(dolist (package package-list)
+  (unless (package-installed-p package)
+    (package-install package)))
 
 ;; Activation des downcase et upcase region
 (put 'downcase-region 'disabled nil)
@@ -174,4 +191,3 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
-
