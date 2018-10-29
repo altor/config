@@ -67,6 +67,8 @@
 (ac-config-default)
 (global-auto-complete-mode t)
 
+;; nombre de character par lignes
+(setq-default fill-column 80)
 
 ;;;;;;;;;;;;;;;;
 ;; Raccourcis ;;
@@ -81,7 +83,28 @@
 
 (global-set-key (kbd "C-c o") 'todotxt-open-file)
 (global-set-key (kbd "C-c t") 'todotxt-add-todo)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Custom splitting functions ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;; split buffer, load the last viewed buffer in the second buffer and set the
+;; focus on this buffer
+
+(defun vsplit-last-buffer ()
+  (interactive)
+  (split-window-vertically)
+  (other-window 1 nil)
+  (switch-to-next-buffer)
+  )
+(defun hsplit-last-buffer ()
+  (interactive)
+  (split-window-horizontally)
+  (other-window 1 nil)
+  (switch-to-next-buffer)
+  )
+ 
+(global-set-key (kbd "C-x 2") 'vsplit-last-buffer)
+(global-set-key (kbd "C-x 3") 'hsplit-last-buffer)
 ;;;;;;;;;;
 ;; mode ;;
 ;;;;;;;;;;
