@@ -25,7 +25,7 @@
  '(mouse-wheel-mode t nil (mwheel))
  '(package-selected-packages
    (quote
-    (ein fill-column-indicator groovy-mode ess auctex ## auto-complete web-mode tuareg skype scala-mode2 rust-mode php-mode php+-mode merlin markdown-mode iedit haskell-mode erlang auto-complete-c-headers arduino-mode)))
+    (python-docstring flycheck-pycheckers flycheck pylint fill-column-indicator groovy-mode ess auctex ## auto-complete web-mode tuareg skype scala-mode2 rust-mode php-mode php+-mode merlin markdown-mode iedit haskell-mode erlang auto-complete-c-headers arduino-mode)))
  '(show-paren-mode t nil (paren))
  '(transient-mark-mode t))
 
@@ -79,10 +79,6 @@
 (global-set-key (kbd "C-x ,") 'windmove-down)
 (global-set-key (kbd "C-x e") 'windmove-right)
 (global-set-key (kbd "C-x a") 'windmove-left)
-;; Racourcie pour todotxt-mode
-
-(global-set-key (kbd "C-c o") 'todotxt-open-file)
-(global-set-key (kbd "C-c t") 'todotxt-add-todo)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Custom splitting functions ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -126,38 +122,23 @@
 (setenv "IPY_TEST_SIMPLE_PROMPT" "1")
   (setq python-shell-interpreter "ipython"
        python-shell-interpreter-args "-i")
-; use the wx backend, for both mayavi and matplotlib
+;; use the wx backend, for both mayavi and matplotlib
 (setq py-python-command-args
   '("--gui=wx" "--pylab=wx" "-colors" "Linux"))
 (setq py-force-py-shell-name-p t)
-; switch to the interpreter after executing code
+;; switch to the interpreter after executing code
 (setq py-shell-switch-buffers-on-execute-p t)
 (setq py-switch-buffers-on-execute-p t)
-; don't split windows
+;; don't split windows
 (setq py-split-windows-on-execute-p nil)
-; try to automagically figure out indentation
+;; try to automagically figure out indentation
 (setq py-smart-indentation t)
 
-
-;; (setq ein:jupyter-default-server-command "/usr/local/bin/jupyter")
-;; (setq ein:jupyter-server-args (list "--no-browser"))
-;; (setq notebook-dir1 "~/")
-;; (global-set-key (kbd "<f7>") '(lambda()
-;; 				(interactive)
-;; 				(ein:jupyter-server-start
-;; 				 (executable-find
-;; 				  "jupyter")
-;; 				 notebook-dir1)))
-;; (global-set-key (kbd "<f8>") '(lambda()
-;; 				(interactive)
-;; 				(ein:jupyter-server-stop)))
-
-;; merlin
-;; (push "/usr/share/emacs/site-lisp" load-path) ; directory containing merlin.el
-;; (setq merlin-command "/usr/bin/ocamlmerlin")  ; needed only if ocamlmerlin not already in your PATH
-;; (autoload 'merlin-mode "merlin" "Merlin mode" t)
-;; (add-hook 'tuareg-mode-hook 'merlin-mode)
-;; (add-hook 'caml-mode-hook 'merlin-mode)
+;; enable syntax/type/pep8 checkers : https://github.com/msherry/flycheck-pycheckers
+(require 'flycheck-pycheckers)
+(global-flycheck-mode 1)
+(with-eval-after-load 'flycheck
+  (add-hook 'flycheck-mode-hook #'flycheck-pycheckers-setup))
 
 ;;.tuareg mode
 (setq auto-mode-alist 
@@ -194,8 +175,3 @@
  ;; If there is more than one, they won't work right.
  )
 
-;; todotxt-mode
-(require 'todotxt-mode)
-(setq todotxt-default-file (expand-file-name "~/Notes/Organisateur/todo.txt"))
-;; LISTE DES MODES ;;
-;; - todotxt-mode : major mode for editing todo.txt file : https://github.com/avillafiorita/todotxt-mode
