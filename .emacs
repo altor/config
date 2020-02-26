@@ -25,7 +25,7 @@
  '(mouse-wheel-mode t nil (mwheel))
  '(package-selected-packages
    (quote
-    (python-docstring flycheck-pycheckers flycheck pylint fill-column-indicator groovy-mode ess auctex auto-complete web-mode tuareg merlin markdown-mode iedit haskell-mode erlang auto-complete-c-headers)))
+    (python-docstring flycheck-pycheckers flycheck pylint fill-column-indicator groovy-mode ess auctex auto-complete web-mode tuareg merlin markdown-mode haskell-mode erlang auto-complete-c-headers)))
  '(show-paren-mode t nil (paren))
  '(transient-mark-mode t))
 
@@ -49,7 +49,7 @@
 ;; installation des packets
 (setq package-list '(python-docstring flycheck-pycheckers
 flycheck pylint fill-column-indicator groovy-mode ess auctex
-auto-complete web-mode tuareg merlin markdown-mode iedit
+auto-complete web-mode tuareg merlin markdown-mode
 haskell-mode erlang auto-complete-c-headers))
 ; activate all the packages (in particular autoloads)
 (package-initialize)
@@ -156,6 +156,14 @@ haskell-mode erlang auto-complete-c-headers))
 (global-flycheck-mode 1)
 (with-eval-after-load 'flycheck
   (add-hook 'flycheck-mode-hook #'flycheck-pycheckers-setup))
+(setq flycheck-pycheckers-checkers '(pylint flake8))
+(setq local-ignore-code '("W504" ; flake8 Line break occurred after a binary operator
+			  "R0902" ; too many instances attributes
+			  "R0903" ; pylint too few public methods
+			  ))
+(setq flycheck-pycheckers-ignore-codes local-ignore-code)
+(setq flycheck-pycheckers-max-line-length 160)
+
 
 ;;.tuareg mode
 (setq auto-mode-alist 
