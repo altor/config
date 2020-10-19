@@ -10,22 +10,17 @@
 (package-initialize)
 
 (custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
  '(case-fold-search t)
  '(current-language-environment "utf-8")
- '(custom-enabled-themes (quote (wombat)))
+ '(custom-enabled-themes '(wombat))
  '(default-input-method "utf-8")
  '(global-font-lock-mode t nil (font-lock))
- '(haskell-mode-hook (quote (turn-on-haskell-indent)) t)
+ '(haskell-mode-hook '(turn-on-haskell-indent) t)
  '(line-number-mode t)
- '(linum-format (quote "%d "))
+ '(linum-format '"%d ")
  '(mouse-wheel-mode t nil (mwheel))
  '(package-selected-packages
-   (quote
-    (python-docstring flycheck-pycheckers flycheck pylint fill-column-indicator groovy-mode ess auctex auto-complete web-mode tuareg merlin markdown-mode haskell-mode erlang auto-complete-c-headers)))
+   '(docker-compose-mode python-docstring flycheck-pycheckers flycheck pylint fill-column-indicator groovy-mode ess auctex auto-complete web-mode tuareg merlin markdown-mode haskell-mode erlang auto-complete-c-headers))
  '(show-paren-mode t nil (paren))
  '(transient-mark-mode t))
 
@@ -43,8 +38,7 @@
 
 ;;synchronisation des packets avec melpa
 (require 'package)
-(add-to-list 'package-archives
-  '("melpa" . "http://melpa.milkbox.net/packages/") t)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 
 ;; installation des packets
 (setq package-list '(python-docstring flycheck-pycheckers
@@ -52,7 +46,6 @@ flycheck pylint fill-column-indicator groovy-mode ess auctex
 auto-complete web-mode tuareg merlin markdown-mode
 haskell-mode erlang auto-complete-c-headers))
 ; activate all the packages (in particular autoloads)
-(package-initialize)
 
 ;; fetch the list of packages available
 (unless package-archive-contents
@@ -93,7 +86,7 @@ haskell-mode erlang auto-complete-c-headers))
 (global-set-key "\M-g" 'goto-line)
 (global-set-key (kbd "M-TAB") 'auto-complete)
 (global-set-key (kbd "C-x p") 'windmove-up)
-(global-set-key (kbd "C-x ,") 'windmove-down)
+(global-set-key (kbd "C-x n") 'windmove-down)
 (global-set-key (kbd "C-x e") 'windmove-right)
 (global-set-key (kbd "C-x a") 'windmove-left)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
